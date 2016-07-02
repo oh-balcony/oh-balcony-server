@@ -13,39 +13,39 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Store {
-	
-	private Logger log = LoggerFactory.getLogger(Store.class);
-	
-	// TODO make configurable
-	private static final String server = "http://lavendulus:8086";
-	private static final String dbName = "ohdb_dev";
-	
-	private final InfluxDB influxDB;
+    
+    private Logger log = LoggerFactory.getLogger(Store.class);
+    
+    // TODO make configurable
+    private static final String server = "http://lavendulus:8086";
+    private static final String dbName = "ohdb_dev";
+    
+    private final InfluxDB influxDB;
 
-	public Store() {
-		log.info("Store connecting to " + server);
-		
-		// TODO make configurable
-		influxDB = InfluxDBFactory.connect(server, "root", "root");
-		influxDB.createDatabase(dbName);
-	}
-	
-	public void save(SensorData sensorData) {
-		
-		BatchPoints batchPoints = BatchPoints.database(dbName).build();
+    public Store() {
+        log.info("Store connecting to " + server);
+        
+        // TODO make configurable
+        influxDB = InfluxDBFactory.connect(server, "root", "root");
+        influxDB.createDatabase(dbName);
+    }
+    
+    public void save(SensorData sensorData) {
+        
+        BatchPoints batchPoints = BatchPoints.database(dbName).build();
 
-		for (Entry<String, Double> entry : sensorData.sensorData.entrySet()) {
-			
-			// TODO do we want to use timestamp from raspberry pi or from server?
-			
-			Point point = Point.measurement("moisture")
-			                    .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
-			                    .tag("sensor", entry.getKey())
-			                    .addField("value", entry.getValue())
-			                    .build();
-			batchPoints.point(point);
-		}
+        for (Entry<String, Double> entry : sensorData.sensorData.entrySet()) {
+            
+            // TODO do we want to use timestamp from raspberry pi or from server?
+            
+            Point point = Point.measurement("moisture")
+                                .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+                                .tag("sensor", entry.getKey())
+                                .addField("value", entry.getValue())
+                                .build();
+            batchPoints.point(point);
+        }
 
-		influxDB.write(batchPoints);
-	}
+        influxDB.write(batchPoints);
+    }
 }
