@@ -3,12 +3,13 @@ Web Service for Oh, Balcony!
 
 ## Building
 
-* Install Java 8
-* Install [Maven 3](https://maven.apache.org/)
-* Clone the repostory:
+- Install Java 8
+- Install [Maven 3](https://maven.apache.org/)
+
+Clone the repostory:
 
     git clone https://github.com/oh-balcony/oh-balcony-server.git
 
-* Build and run in development mode:
+Build and run in development mode:
 
     mvn spring-boot:run
