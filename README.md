@@ -6,7 +6,7 @@ Web Service for Oh, Balcony!
 - Install Java 8
 - Install [Maven 3](https://maven.apache.org/)
 
-Clone the repostory:
+Clone the repository:
 
     git clone https://github.com/oh-balcony/oh-balcony-server.git
 
