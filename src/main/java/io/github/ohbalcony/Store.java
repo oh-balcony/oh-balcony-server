@@ -63,7 +63,7 @@ public class Store {
             Point point = Point.measurement(MEASUREMENT_PUMP)
                                 .time(currentTimeMillis, TimeUnit.MILLISECONDS)
                                 .tag(TAG_NAME, entry.getKey())
-                                .addField(FIELD_VALUE, entry.getValue())
+                                .addField(FIELD_VALUE, booleanToInteger(entry.getValue()))
                                 .build();
             batchPoints.point(point);
         }
@@ -71,11 +71,15 @@ public class Store {
             Point point = Point.measurement(MEASUREMENT_VALVE)
                                 .time(currentTimeMillis, TimeUnit.MILLISECONDS)
                                 .tag(TAG_NAME, entry.getKey())
-                                .addField(FIELD_VALUE, entry.getValue())
+                                .addField(FIELD_VALUE, booleanToInteger(entry.getValue()))
                                 .build();
             batchPoints.point(point);
         }
 
         influxDB.write(batchPoints);
+    }
+
+    private int booleanToInteger(boolean value) {
+        return value ? 1 : 0;
     }
 }
