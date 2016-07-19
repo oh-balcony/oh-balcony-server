@@ -30,9 +30,13 @@ public class Controller {
     }
 
     @RequestMapping(value = "/store", method = RequestMethod.POST)
-    public SensorData store(@RequestBody SensorData sensorData) {
+    public Instructions store(@RequestBody SensorData sensorData) {
         store.save(sensorData);
-        return sensorData;
+        
+        Instructions instructions = new Instructions();
+        instructions.pumps.put("pump1", false);
+        instructions.valves.put("valve1", false);
+        return instructions;
     }
 
 }
