@@ -20,6 +20,14 @@ public class Store {
     private static final String server = "http://lavendulus:8086";
     private static final String dbName = "ohdb_dev";
     
+    private static final String MEASUREMENT_MOISTURE = "moisture";
+    private static final String MEASUREMENT_TANK = "tank";
+    private static final String MEASUREMENT_PUMP = "pump";
+    private static final String MEASUREMENT_VALVE = "valve";
+    
+    private static final String TAG_NAME = "name";
+    private static final String FIELD_VALUE = "value";
+    
     private final InfluxDB influxDB;
 
     public Store() {
@@ -34,14 +42,36 @@ public class Store {
         
         BatchPoints batchPoints = BatchPoints.database(dbName).build();
 
-        for (Entry<String, Double> entry : sensorData.sensorData.entrySet()) {
-            
-            // TODO do we want to use timestamp from raspberry pi or from server?
-            
-            Point point = Point.measurement("moisture")
-                                .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
-                                .tag("sensor", entry.getKey())
-                                .addField("value", entry.getValue())
+        long currentTimeMillis = System.currentTimeMillis();
+        for (Entry<String, Double> entry : sensorData.moisture.entrySet()) {
+            Point point = Point.measurement(MEASUREMENT_MOISTURE)
+                                .time(currentTimeMillis, TimeUnit.MILLISECONDS)
+                                .tag(TAG_NAME, entry.getKey())
+                                .addField(FIELD_VALUE, entry.getValue())
+                                .build();
+            batchPoints.point(point);
+        }
+        for (Entry<String, Double> entry : sensorData.tanks.entrySet()) {
+            Point point = Point.measurement(MEASUREMENT_TANK)
+                                .time(currentTimeMillis, TimeUnit.MILLISECONDS)
+                                .tag(TAG_NAME, entry.getKey())
+                                .addField(FIELD_VALUE, entry.getValue())
+                                .build();
+            batchPoints.point(point);
+        }
+        for (Entry<String, Boolean> entry : sensorData.pumps.entrySet()) {
+            Point point = Point.measurement(MEASUREMENT_PUMP)
+                                .time(currentTimeMillis, TimeUnit.MILLISECONDS)
+                                .tag(TAG_NAME, entry.getKey())
+                                .addField(FIELD_VALUE, entry.getValue())
+                                .build();
+            batchPoints.point(point);
+        }
+        for (Entry<String, Boolean> entry : sensorData.valves.entrySet()) {
+            Point point = Point.measurement(MEASUREMENT_VALVE)
+                                .time(currentTimeMillis, TimeUnit.MILLISECONDS)
+                                .tag(TAG_NAME, entry.getKey())
+                                .addField(FIELD_VALUE, entry.getValue())
                                 .build();
             batchPoints.point(point);
         }
