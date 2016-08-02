@@ -52,13 +52,17 @@ public class Controller {
     private boolean shouldWater() {
         boolean shouldWater = false;
         
-        // TODO hardcoded time
-        LocalTime startTime = LocalTime.of(8, 0);
-        LocalTime endTime = LocalTime.of(8, 7);
+        // TODO hardcoded times
+        LocalTime startTime1 = LocalTime.of(8, 0);
+        LocalTime endTime1 = LocalTime.of(8, 2);
+        
+        LocalTime startTime2 = LocalTime.of(15, 0);
+        LocalTime endTime2 = LocalTime.of(15, 1);
         
         LocalDateTime now = LocalDateTime.now();
         LocalTime nowTime = now.toLocalTime();
-        if (nowTime.isAfter(startTime) && nowTime.isBefore(endTime)) {
+        if ( (nowTime.isAfter(startTime1) && nowTime.isBefore(endTime1)) ||
+             (nowTime.isAfter(startTime2) && nowTime.isBefore(endTime2)) ) {
             // TODO hardcoded tank name
             double tankWaterLevel = store.getCurrentTankLevel("tank1");
             
