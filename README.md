@@ -1,5 +1,5 @@
 # oh-balcony-server
-Web Service for Oh, Balcony!
+Web Service for [Oh, Balcony!](http://oh-balcony.github.io/)
 
 ## Building
 
