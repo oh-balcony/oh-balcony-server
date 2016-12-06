@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.PostConstruct;
+
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBFactory;
 import org.influxdb.dto.BatchPoints;
@@ -22,7 +24,7 @@ public class Store {
     private static final Logger log = LoggerFactory.getLogger(Store.class);
     
     // TODO make configurable
-    private static final String server = "http://lavendulus:8086";
+    private static final String server = "http://gerty:8086";
     private static final String dbName = "ohdb_dev";
     
     private static final String MEASUREMENT_MOISTURE = "moisture";
@@ -33,9 +35,10 @@ public class Store {
     private static final String TAG_NAME = "name";
     private static final String FIELD_VALUE = "value";
     
-    private final InfluxDB influxDB;
-
-    public Store() {
+    private InfluxDB influxDB;
+    
+    @PostConstruct
+    public void init() {
         log.info("Store connecting to " + server);
         
         // TODO make configurable
