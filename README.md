@@ -19,3 +19,9 @@ Clone this repository:
 Build and run in development mode:
 
     mvn spring-boot:run
+
+## RESTful API
+
+After starting the Web Service have a look at the Swagger UI to see available REST endpoints:
+
+http://localhost:8080/swagger-ui.html
