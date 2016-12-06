@@ -1,4 +1,4 @@
-package io.github.ohbalcony;
+package io.github.ohbalcony.model;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,8 +1,9 @@
-package io.github.ohbalcony;
+package io.github.ohbalcony.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO remove
 public class SensorData {
     /**
      * Key: Name of soil moisture sensor.

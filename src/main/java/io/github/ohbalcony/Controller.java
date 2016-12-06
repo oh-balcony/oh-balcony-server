@@ -6,12 +6,26 @@ import java.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.ohbalcony.model.HardwareController;
+import io.github.ohbalcony.model.HardwareReference;
+import io.github.ohbalcony.model.Instructions;
+import io.github.ohbalcony.model.MoistureSensor;
+import io.github.ohbalcony.model.Pump;
+import io.github.ohbalcony.model.SensorData;
+import io.github.ohbalcony.model.SystemState;
+import io.github.ohbalcony.model.Tank;
+import io.github.ohbalcony.model.Valve;
+import io.github.ohbalcony.model.Zone;
+
 @RestController
+@CrossOrigin // TODO security: don't allow for any origin for production
 public class Controller {
 
     private static final Logger log = LoggerFactory.getLogger(Controller.class);
@@ -22,18 +36,50 @@ public class Controller {
     public Controller(Store store) {
         this.store = store;
     }
-
-    @RequestMapping("/test")
-    public SensorData test() {
-        SensorData sensorData = new SensorData();
-        sensorData.moisture.put("sensor1", 0.2);
-        sensorData.moisture.put("sensor2", 0.3);
-        sensorData.tanks.put("tank", 50.0);
-        sensorData.pumps.put("pump1", true);
-        sensorData.pumps.put("pump2", false);
-        sensorData.valves.put("valve1", true);
-        sensorData.valves.put("valve2", false);
-        return sensorData;
+    
+    @GetMapping(value = "/")
+    public SystemState getSystemState() {
+        
+        SystemState systemState = new SystemState();
+        
+        HardwareController hardwareController = new HardwareController();
+        hardwareController.id = "controller1";
+        hardwareController.name = "Raspberry Pi";
+        systemState.controllers.add(hardwareController);
+        
+        Pump pump = new Pump();
+        pump.id = "pump1";
+        pump.name = "Pump 1";
+        hardwareController.pumps.add(pump);
+        
+        MoistureSensor moistureSensor1 = new MoistureSensor();
+        moistureSensor1.id = "moisture1";
+        moistureSensor1.name = "Strawberries";
+        hardwareController.moistureSensors.add(moistureSensor1);
+        
+        MoistureSensor moistureSensor2 = new MoistureSensor();
+        moistureSensor2.id = "moisture2";
+        moistureSensor2.name = "Wine";
+        hardwareController.moistureSensors.add(moistureSensor2);
+        
+        Valve valve = new Valve();
+        valve.id = "valve1";
+        valve.name = "Valve 1";
+        hardwareController.valves.add(valve);
+        
+        Tank tank = new Tank();
+        tank.id = "tank1";
+        tank.name = "Water tank";
+        hardwareController.tanks.add(tank);
+        
+        Zone zone = new Zone();
+        HardwareReference hardwareReference = new HardwareReference();
+        hardwareReference.controllerId = hardwareController.id;
+        hardwareReference.componentId = pump.id;
+        zone.hardwareComponents.add(hardwareReference);
+        systemState.zones.add(zone);
+        
+        return systemState;
     }
 
     @RequestMapping(value = "/store", method = RequestMethod.POST)

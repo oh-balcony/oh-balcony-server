@@ -18,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import io.github.ohbalcony.model.SensorData;
+
 @Service
 public class Store {
     
