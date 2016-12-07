@@ -9,5 +9,5 @@ import java.util.List;
  * @author Hermann Czedik-Eysenerg
  */
 public class Zone {
-    public List<HardwareReference> hardwareComponents = new ArrayList<>();
+    public List<HardwareReference> hardwareReferences = new ArrayList<>();
 }

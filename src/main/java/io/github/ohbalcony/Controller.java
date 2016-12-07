@@ -6,7 +6,6 @@ import java.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +22,9 @@ import io.github.ohbalcony.model.SystemState;
 import io.github.ohbalcony.model.Tank;
 import io.github.ohbalcony.model.Valve;
 import io.github.ohbalcony.model.Zone;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
-@CrossOrigin // TODO security: don't allow for any origin for production
 public class Controller {
 
     private static final Logger log = LoggerFactory.getLogger(Controller.class);
@@ -37,7 +36,8 @@ public class Controller {
         this.store = store;
     }
     
-    @GetMapping(value = "/")
+    @ApiOperation("Gets the complete system state for the currently logged in user")
+    @GetMapping(value = "/api/systemState")
     public SystemState getSystemState() {
         
         SystemState systemState = new SystemState();
@@ -76,14 +76,14 @@ public class Controller {
         HardwareReference hardwareReference = new HardwareReference();
         hardwareReference.controllerId = hardwareController.id;
         hardwareReference.componentId = pump.id;
-        zone.hardwareComponents.add(hardwareReference);
+        zone.hardwareReferences.add(hardwareReference);
         systemState.zones.add(zone);
         
         return systemState;
     }
 
-    @RequestMapping(value = "/store", method = RequestMethod.POST)
-    public Instructions store(@RequestBody SensorData sensorData) {
+    @RequestMapping(value = "/api/updateControllerState", method = RequestMethod.POST)
+    public Instructions updateControllerState(@RequestBody SensorData sensorData) {
         store.save(sensorData);
         
         boolean shouldWater = shouldWater();
