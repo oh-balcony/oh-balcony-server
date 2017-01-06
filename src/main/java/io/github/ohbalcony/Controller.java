@@ -2,6 +2,8 @@ package io.github.ohbalcony;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,14 +12,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.ohbalcony.model.Hardware;
 import io.github.ohbalcony.model.HardwareController;
 import io.github.ohbalcony.model.HardwareReference;
 import io.github.ohbalcony.model.Instructions;
 import io.github.ohbalcony.model.MoistureSensor;
 import io.github.ohbalcony.model.Pump;
 import io.github.ohbalcony.model.SensorData;
+import io.github.ohbalcony.model.SensorValue;
+import io.github.ohbalcony.model.SensorValues;
 import io.github.ohbalcony.model.SystemState;
 import io.github.ohbalcony.model.Tank;
 import io.github.ohbalcony.model.Valve;
@@ -73,13 +79,36 @@ public class Controller {
         hardwareController.tanks.add(tank);
         
         Zone zone = new Zone();
-        HardwareReference hardwareReference = new HardwareReference();
-        hardwareReference.controllerId = hardwareController.id;
-        hardwareReference.componentId = pump.id;
-        zone.hardwareReferences.add(hardwareReference);
+        addHardwareToZone(hardwareController, pump, zone);
+        addHardwareToZone(hardwareController, moistureSensor1, zone);
+        addHardwareToZone(hardwareController, valve, zone);
+        addHardwareToZone(hardwareController, tank, zone);
         systemState.zones.add(zone);
         
         return systemState;
+    }
+
+    private void addHardwareToZone(HardwareController hardwareController, Hardware hardware, Zone zone) {
+        HardwareReference hardwareReference = new HardwareReference();
+        hardwareReference.controllerId = hardwareController.id;
+        hardwareReference.componentId = hardware.id;
+        zone.hardwareReferences.add(hardwareReference);
+    }
+
+    @ApiOperation("Gets sensor values for a given time range")
+    @GetMapping(value = "/api/sensorValues")
+    public SensorValues getSystemState(@RequestParam long fromTimeMillis, @RequestParam long toTimeMillis) {
+
+        // TODO
+        log.info("from: {} to: {}", new Date(fromTimeMillis), new Date(toTimeMillis));
+
+        SensorValues sensorValues = new SensorValues();
+        sensorValues.values
+                .add(new SensorValue(new Date(System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(3)), 0.1));
+        sensorValues.values
+                .add(new SensorValue(new Date(System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(2)), 0.7));
+        sensorValues.values.add(new SensorValue(new Date(System.currentTimeMillis()), 0.3));
+        return sensorValues;
     }
 
     @RequestMapping(value = "/api/updateControllerState", method = RequestMethod.POST)
