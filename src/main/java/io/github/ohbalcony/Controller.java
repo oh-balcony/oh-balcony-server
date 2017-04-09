@@ -1,7 +1,5 @@
 package io.github.ohbalcony;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -128,26 +126,26 @@ public class Controller {
         boolean shouldWater = false;
         
         // TODO hardcoded times
-        LocalTime startTime1 = LocalTime.of(8, 0);
-        LocalTime endTime1 = LocalTime.of(8, 2);
-        
-        LocalTime startTime2 = LocalTime.of(15, 0);
-        LocalTime endTime2 = LocalTime.of(15, 1);
-        
-        LocalDateTime now = LocalDateTime.now();
-        LocalTime nowTime = now.toLocalTime();
-        if ( (nowTime.isAfter(startTime1) && nowTime.isBefore(endTime1)) ||
-             (nowTime.isAfter(startTime2) && nowTime.isBefore(endTime2)) ) {
-            // TODO hardcoded tank name
-            double tankWaterLevel = store.getCurrentTankLevel("tank1");
-            
-            shouldWater = tankWaterLevel > 0.0;
-            
-            if(shouldWater)
-                log.info("Watering now");
-            else
-                log.info("NOT watering, because the tank is empty.");
-        }
+        // LocalTime startTime1 = LocalTime.of(8, 0);
+        // LocalTime endTime1 = LocalTime.of(8, 2);
+        //
+        // LocalTime startTime2 = LocalTime.of(15, 0);
+        // LocalTime endTime2 = LocalTime.of(15, 1);
+        //
+        // LocalDateTime now = LocalDateTime.now();
+        // LocalTime nowTime = now.toLocalTime();
+        // if ( (nowTime.isAfter(startTime1) && nowTime.isBefore(endTime1)) ||
+        // (nowTime.isAfter(startTime2) && nowTime.isBefore(endTime2)) ) {
+        // // TODO hardcoded tank name
+        // double tankWaterLevel = store.getCurrentTankLevel("tank1");
+        //
+        // shouldWater = tankWaterLevel > 0.0;
+        //
+        // if(shouldWater)
+        // log.info("Watering now");
+        // else
+        // log.info("NOT watering, because the tank is empty.");
+        // }
         return shouldWater;
     }
 
