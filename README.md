@@ -25,3 +25,7 @@ Build and run in development mode:
 After starting the Web Service have a look at the Swagger UI to see available REST endpoints:
 
 http://localhost:8080/swagger-ui.html
+
+## Installation as a service
+
+Refer to the [Spring Boot documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html#deployment-systemd-service).
