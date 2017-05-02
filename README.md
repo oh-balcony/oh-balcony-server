@@ -58,11 +58,11 @@ Adapt `User`, `ExecStart` as needed.
 
 Startup the service now:
 
-    sudo systemctl start myapp.service
+    sudo systemctl start oh-balcony.service
 
 Enable automatic service startup (after reboot):
 
-    sudo systemctl enable myapp.service
+    sudo systemctl enable oh-balcony.service
 
 To follow the log file after installing as a systemd service:
 
