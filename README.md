@@ -43,7 +43,7 @@ Create a file called `/etc/systemd/system/oh-balcony.service`:
 ```
 [Unit]
 Description=oh-balcony-service
-After=syslog.target
+After=influxd.service
 
 [Service]
 User=pi
@@ -54,7 +54,7 @@ SuccessExitStatus=143
 WantedBy=multi-user.target
 ```
 
-Adapt `User`, `ExecStart` as needed.
+Adapt `User`, `ExecStart` as needed. Note that it is configured to start after the InfluxDB service.
 
 Startup the service now:
 
