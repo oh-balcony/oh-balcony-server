@@ -30,6 +30,7 @@ public class Store {
     private static final String dbName = "ohdb";
     
     private static final String MEASUREMENT_MOISTURE = "moisture";
+    private static final String MEASUREMENT_TEMPERATURE = "temperature";
     private static final String MEASUREMENT_TANK = "tank";
     private static final String MEASUREMENT_PUMP = "pump";
     private static final String MEASUREMENT_VALVE = "valve";
@@ -55,6 +56,14 @@ public class Store {
         long currentTimeMillis = System.currentTimeMillis();
         for (Entry<String, Double> entry : sensorData.moisture.entrySet()) {
             Point point = Point.measurement(MEASUREMENT_MOISTURE)
+                                .time(currentTimeMillis, TimeUnit.MILLISECONDS)
+                                .tag(TAG_NAME, entry.getKey())
+                                .addField(FIELD_VALUE, entry.getValue())
+                                .build();
+            batchPoints.point(point);
+        }
+        for (Entry<String, Double> entry : sensorData.temperature.entrySet()) {
+            Point point = Point.measurement(MEASUREMENT_TEMPERATURE)
                                 .time(currentTimeMillis, TimeUnit.MILLISECONDS)
                                 .tag(TAG_NAME, entry.getKey())
                                 .addField(FIELD_VALUE, entry.getValue())

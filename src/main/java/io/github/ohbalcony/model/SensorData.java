@@ -12,6 +12,13 @@ public class SensorData {
     public Map<String, Double> moisture = new HashMap<>();
     
     /**
+     * Key: Name of temperature sensor.
+     * Value: Sensor measurement (degree Celcius)
+     */
+    public Map<String, Double> temperature = new HashMap<>();
+    
+    
+    /**
      * Key: Name of Tank.
      * Value: Water level in tank (0.0 to 100.0)
      */
