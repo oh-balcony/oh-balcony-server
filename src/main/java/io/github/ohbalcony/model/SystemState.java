@@ -18,7 +18,7 @@ public class SystemState {
         return getControllerById(hardwareReference.controllerId).flatMap(c -> c.getHardwareById(hardwareReference.componentId));
     }
 
-    private Optional<HardwareController> getControllerById(String controllerId) {
+    public Optional<HardwareController> getControllerById(String controllerId) {
         return controllers.stream()
                 .filter(c -> c.id.equals(controllerId))
                 .findFirst();

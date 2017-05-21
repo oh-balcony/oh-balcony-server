@@ -1,0 +1,120 @@
+{
+  "controllers": [
+    {
+      "id": "controller1",
+      "name": "Raspberry Pi",
+      "pumps": [
+        {
+          "id": "pump1",
+          "name": "Pump"
+        }
+      ],
+      "valves": [
+        {
+          "id": "valve1",
+          "name": "Valve 1"
+        },
+        {
+          "id": "valve2",
+          "name": "Valve 2"
+        },
+        {
+          "id": "valve3",
+          "name": "Valve 3"
+        },
+        {
+          "id": "valve4",
+          "name": "Valve 4"
+        }
+      ],
+      "tanks": [
+        {
+          "id": "tank1",
+          "name": "Water tank"
+        }
+      ],
+      "moistureSensors": [
+        {
+          "id": "moisture1",
+          "name": "Moisture 1"
+        },
+        {
+          "id": "moisture2",
+          "name": "Moisture 2"
+        },
+        {
+          "id": "moisture3",
+          "name": "Moisture 3"
+        }
+      ]
+    }
+  ],
+  "zones": [
+    {
+      "name": "Kisterln",
+      "hardwareReferences": [
+        {
+          "controllerId": "controller1",
+          "componentId": "pump1"
+        },
+        {
+          "controllerId": "controller1",
+          "componentId": "moisture1"
+        },
+        {
+          "controllerId": "controller1",
+          "componentId": "valve4"
+        },
+        {
+          "controllerId": "controller1",
+          "componentId": "tank1"
+        }
+      ],
+      "activeCondition": "tank1 > 0 and (timeBetween(\"7:30\", \"7:31\") or timeBetween(\"21:50\", \"21:51\"))"
+    },
+    {
+      "name": "Töpfe",
+      "hardwareReferences": [
+        {
+          "controllerId": "controller1",
+          "componentId": "pump1"
+        },
+        {
+          "controllerId": "controller1",
+          "componentId": "moisture1"
+        },
+        {
+          "controllerId": "controller1",
+          "componentId": "valve3"
+        },
+        {
+          "controllerId": "controller1",
+          "componentId": "tank1"
+        }
+      ],
+      "activeCondition": "tank1 > 0 and (timeBetween(\"7:31\", \"7:32\") or timeBetween(\"21:51\", \"21:52\"))"
+    },
+    {
+      "name": "Beete",
+      "hardwareReferences": [
+        {
+          "controllerId": "controller1",
+          "componentId": "pump1"
+        },
+        {
+          "controllerId": "controller1",
+          "componentId": "moisture1"
+        },
+        {
+          "controllerId": "controller1",
+          "componentId": "valve2"
+        },
+        {
+          "controllerId": "controller1",
+          "componentId": "tank1"
+        }
+      ],
+      "activeCondition": "tank1 > 0 and (timeBetween(\"7:32\", \"7:33\") or timeBetween(\"21:52\", \"21:53\"))"
+    }
+  ]
+}

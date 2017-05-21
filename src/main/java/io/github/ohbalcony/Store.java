@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import io.github.ohbalcony.model.Instructions;
 import io.github.ohbalcony.model.SensorData;
 
 @Service
@@ -27,7 +28,7 @@ public class Store {
     
     // TODO make configurable
     private static final String server = "http://gerty:8086";
-    private static final String dbName = "ohdb";
+    private static final String dbName = "ohdb-dev";
     
     private static final String MEASUREMENT_MOISTURE = "moisture";
     private static final String MEASUREMENT_TEMPERATURE = "temperature";
@@ -49,7 +50,7 @@ public class Store {
         influxDB.createDatabase(dbName);
     }
     
-    public void save(SensorData sensorData) {
+    public void save(SensorData sensorData, Instructions instructions) {
         
         BatchPoints batchPoints = BatchPoints.database(dbName).build();
 
@@ -78,7 +79,7 @@ public class Store {
                                 .build();
             batchPoints.point(point);
         }
-        for (Entry<String, Boolean> entry : sensorData.pumps.entrySet()) {
+        for (Entry<String, Boolean> entry : instructions.pumps.entrySet()) {
             Point point = Point.measurement(MEASUREMENT_PUMP)
                                 .time(currentTimeMillis, TimeUnit.MILLISECONDS)
                                 .tag(TAG_NAME, entry.getKey())
@@ -86,7 +87,7 @@ public class Store {
                                 .build();
             batchPoints.point(point);
         }
-        for (Entry<String, Boolean> entry : sensorData.valves.entrySet()) {
+        for (Entry<String, Boolean> entry : instructions.valves.entrySet()) {
             Point point = Point.measurement(MEASUREMENT_VALVE)
                                 .time(currentTimeMillis, TimeUnit.MILLISECONDS)
                                 .tag(TAG_NAME, entry.getKey())

@@ -9,5 +9,9 @@ import java.util.List;
  * @author Hermann Czedik-Eysenerg
  */
 public class Zone {
+    public String name;
+
     public List<HardwareReference> hardwareReferences = new ArrayList<>();
+
+    public String activeCondition;
 }
