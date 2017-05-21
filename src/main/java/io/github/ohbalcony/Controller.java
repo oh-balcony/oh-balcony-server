@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
@@ -120,10 +121,17 @@ public class Controller {
                 }
 
                 Hardware hw = hwOpt.get();
+                Map<String, Boolean> toConfigure = null;
                 if (hw instanceof Pump) {
-                    instructions.pumps.put(hw.id, shouldBeActive);
+                    toConfigure = instructions.pumps;
                 } else if (hw instanceof Valve) {
-                    instructions.valves.put(hw.id, shouldBeActive);
+                    toConfigure = instructions.valves;
+                }
+                if (toConfigure != null) {
+                    Boolean currentValue = toConfigure.get(hw.id);
+                    // note: active overwrites inactive from other zone
+                    if (currentValue == null || !currentValue)
+                        toConfigure.put(hw.id, shouldBeActive);
                 }
             }
         }
