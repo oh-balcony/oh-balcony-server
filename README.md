@@ -1,7 +1,7 @@
 # oh-balcony-server
 Server for [Oh, Balcony!](http://oh-balcony.github.io/)
 
-It is developed using the [Spring Boot](https://projects.spring.io/spring-boot/) Framework and stores sensor data in the time-series database [InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/). Visualization of the stored sensor data can be done using [Grafana](http://grafana.org/).
+It is developed using the [Spring Boot](https://projects.spring.io/spring-boot/) Framework and stores sensor data in the time-series database [InfluxDB](https://www.influxdata.com/time-series-platform/influxdb/). Visualization of the stored sensor data can be done using [Grafana](http://grafana.org/), and soon hopefully also using the [Web User Interface](https://github.com/oh-balcony/oh-balcony-web), which is under development.
 
 ## Prerequisites
 
