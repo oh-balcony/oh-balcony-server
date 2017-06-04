@@ -7,7 +7,7 @@ It is developed using the [Spring Boot](https://projects.spring.io/spring-boot/)
 
 - Install Java 8
 - Install [Maven 3](https://maven.apache.org/)
-- Install and start InfluxDB by following the [Installation instructions](https://docs.influxdata.com/influxdb/latest/introduction/installation/) (Tested with version 1.1)
+- Install and start InfluxDB by following the [Installation instructions](https://docs.influxdata.com/influxdb/latest/introduction/installation/) (Tested with version 1.2, but newer versions should work too)
 
 Clone this repository:
 
