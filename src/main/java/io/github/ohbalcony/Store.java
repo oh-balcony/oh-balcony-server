@@ -2,6 +2,7 @@ package io.github.ohbalcony;
 
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import io.github.ohbalcony.model.ControllerState;
 import io.github.ohbalcony.model.Instructions;
 import io.github.ohbalcony.model.SensorData;
 
@@ -36,7 +38,11 @@ public class Store {
     private static final String MEASUREMENT_PUMP = "pump";
     private static final String MEASUREMENT_VALVE = "valve";
     
+    private static final String MEASUREMENT_GENERAL = "measure";
+
     private static final String TAG_NAME = "name";
+    private static final String TAG_CONTROLLER_ID = "controller";
+    
     private static final String FIELD_VALUE = "value";
     
     private InfluxDB influxDB;
@@ -141,5 +147,27 @@ public class Store {
 
     private int booleanToInteger(boolean value) {
         return value ? 1 : 0;
+    }
+
+    public void save(ControllerState state) {
+
+        String controllerId = Objects.requireNonNull(state.controllerId);
+        
+        // TODO currently only used for Aquarium (which actually has nothing to do with Oh, Balcony)
+        BatchPoints batchPoints = BatchPoints.database("home").build();
+
+        long currentTimeMillis = System.currentTimeMillis();
+
+        for (Entry<String, Double> entry : state.values.entrySet()) {
+            
+            Point point = Point.measurement(MEASUREMENT_GENERAL)
+                    .time(currentTimeMillis, TimeUnit.MILLISECONDS)
+                    .tag(TAG_CONTROLLER_ID, controllerId)
+                    .tag(TAG_NAME, entry.getKey())
+                    .addField(FIELD_VALUE, entry.getValue()).build();
+            batchPoints.point(point);
+        }
+
+        influxDB.write(batchPoints);
     }
 }
