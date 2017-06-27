@@ -153,6 +153,9 @@ public class Store {
 
         String controllerId = Objects.requireNonNull(state.controllerId);
         
+        if (state.values.isEmpty())
+            return; // nothing to save
+
         // TODO currently only used for Aquarium (which actually has nothing to do with Oh, Balcony)
         BatchPoints batchPoints = BatchPoints.database("home").build();
 
