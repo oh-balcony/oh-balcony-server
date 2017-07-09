@@ -42,6 +42,8 @@ public class ControllerManager {
     public void updateState(ControllerState state) {
         String controllerId = Objects.requireNonNull(state.controllerId);
 
+        log.info("Update state for {}: {}", state.controllerId, state.values);
+
         ConnectedController connectedController = connectedControllers.get(controllerId);
         if (connectedController == null) {
             log.warn("Cannot update state for " + controllerId + ". Controller is not connected.");
