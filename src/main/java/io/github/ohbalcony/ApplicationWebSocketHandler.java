@@ -1,6 +1,7 @@
 package io.github.ohbalcony;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class ApplicationWebSocketHandler extends TextWebSocketHandler {
     private static final ObjectMapper jsonMapper = new ObjectMapper();
 
     @Autowired
-    private Store store;
+    private ControllerManager manager;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -36,9 +37,16 @@ public class ApplicationWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         ControllerState state = jsonMapper.readValue(message.getPayload(), ControllerState.class);
+        manager.receiveState(state, updatedState -> sendUpdatedState(session, updatedState));
+    }
 
-        // TODO remember session for this controllerId here
-
-        store.save(state);
+    private void sendUpdatedState(WebSocketSession session, ControllerState updatedState) {
+        Objects.requireNonNull(updatedState);
+        try {
+            String msg = jsonMapper.writeValueAsString(updatedState);
+            session.sendMessage(new TextMessage(msg));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

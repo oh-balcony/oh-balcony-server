@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.github.ohbalcony.model.ControllerState;
 import io.github.ohbalcony.model.Hardware;
 import io.github.ohbalcony.model.HardwareController;
 import io.github.ohbalcony.model.HardwareReference;
@@ -46,6 +47,7 @@ public class Controller {
     private static final Logger log = LoggerFactory.getLogger(Controller.class);
     
     private final Store store;
+    private final ControllerManager manager;
 
     private final SystemState systemState;
 
@@ -54,8 +56,9 @@ public class Controller {
     private final JexlEngine jexl;
 
     @Autowired
-    public Controller(Store store) {
+    public Controller(Store store, ControllerManager manager) {
         this.store = store;
+        this.manager = manager;
 
         jexl = new JexlBuilder().cache(100).namespaces(Collections.singletonMap(null, ExpressionFunctions.class))
                 .create();
@@ -141,4 +144,15 @@ public class Controller {
         return instructions;
     }
 
+    // currently only used for Aquarium:
+
+    @GetMapping(value = "/api/controller/{id}")
+    public ControllerState getControllerState(@PathVariable("id") String controllerId) {
+        return manager.getState(controllerId);
+    }
+
+    @RequestMapping(value = "/api/updateController", method = RequestMethod.POST)
+    public void updateController(ControllerState state) {
+        manager.updateState(state);
+    }
 }
