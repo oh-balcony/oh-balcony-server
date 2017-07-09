@@ -152,7 +152,7 @@ public class Controller {
     }
 
     @RequestMapping(value = "/api/updateController", method = RequestMethod.POST)
-    public void updateController(ControllerState state) {
+    public void updateController(@RequestBody ControllerState state) {
         manager.updateState(state);
     }
 }
