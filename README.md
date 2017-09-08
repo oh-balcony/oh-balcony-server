@@ -47,6 +47,8 @@ After=influxd.service
 
 [Service]
 User=pi
+# Make sure to wait a bit so that influxd can start up completely
+ExecStartPre=sleep 3
 ExecStart=/home/pi/software/oh-balcony-server/target/oh-balcony-server-0.0.1-SNAPSHOT.jar
 SuccessExitStatus=143
 
