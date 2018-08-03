@@ -51,7 +51,7 @@
   ],
   "zones": [
     {
-      "name": "Kisterln",
+      "name": "Beete",
       "hardwareReferences": [
         {
           "controllerId": "controller1",
@@ -70,7 +70,7 @@
           "componentId": "tank1"
         }
       ],
-      "activeCondition": "tank1 > 0 and (timeBetween(\"7:30\", \"7:31\") or timeBetween(\"22:00\", \"22:01\"))"
+      "activeCondition": "tank1 > 0 and (timeBetween(\"7:30\", \"7:31\") or timeBetween(\"20:00\", \"20:01\"))"
     },
     {
       "name": "Töpfe",
@@ -92,10 +92,10 @@
           "componentId": "tank1"
         }
       ],
-      "activeCondition": "tank1 > 0 and (timeBetween(\"7:31\", \"7:32\") or timeBetween(\"22:01\", \"22:02\"))"
+      "activeCondition": "tank1 > 0 and (timeBetween(\"7:31\", \"7:32\") or timeBetween(\"20:01\", \"20:02\"))"
     },
     {
-      "name": "Beete",
+      "name": "Kisterln",
       "hardwareReferences": [
         {
           "controllerId": "controller1",
@@ -114,7 +114,7 @@
           "componentId": "tank1"
         }
       ],
-      "activeCondition": "tank1 > 0 and (timeBetween(\"7:32\", \"7:33\") or timeBetween(\"22:02\", \"22:03\"))"
+      "activeCondition": "tank1 > 0 and (timeBetween(\"7:32\", \"7:33\") or timeBetween(\"20:02\", \"20:03\"))"
     }
   ]
 }
