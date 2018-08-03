@@ -70,7 +70,7 @@
           "componentId": "tank1"
         }
       ],
-      "activeCondition": "tank1 > 0 and (timeBetween(\"7:30\", \"7:31\") or timeBetween(\"12:00\", \"20:01\") or (timeBetween(\"16:30\", \"16:32\") and moisture2 < 0.4)) or (timeBetween(\"20:00\", \"20:07\") and moisture2 < 0.4))"
+      "activeCondition": "tank1 > 0 and (timeBetween(\"7:30\", \"7:31\") or timeBetween(\"12:00\", \"20:01\") or (timeBetween(\"16:40\", \"16:42\") and moisture2 < 0.4) or (timeBetween(\"20:00\", \"20:05\") and moisture2 < 0.4))"
     },
     {
       "name": "Töpfe",
@@ -92,7 +92,7 @@
           "componentId": "tank1"
         }
       ],
-      "activeCondition": "tank1 > 0 and (timeBetween(\"7:31\", \"7:32\") or timeBetween(\"12:01\", \"12:02\") or (timeBetween(\"16:32\", \"16:34\") and moisture2 < 0.4)) or (timeBetween(\"20:07\", \"20:14\") and moisture1 < 0.4))"
+      "activeCondition": "tank1 > 0 and (timeBetween(\"7:31\", \"7:32\") or timeBetween(\"12:01\", \"12:02\") or (timeBetween(\"16:42\", \"16:44\") and moisture2 < 0.4) or (timeBetween(\"20:05\", \"20:10\") and moisture1 < 0.4))"
     },
     {
       "name": "Kisterln",
@@ -114,7 +114,7 @@
           "componentId": "tank1"
         }
       ],
-      "activeCondition": "tank1 > 0 and (timeBetween(\"7:32\", \"7:33\") or timeBetween(\"12:02\", \"12:03\") or (timeBetween(\"16:34\", \"16:36\") and moisture2 < 0.4)) or (timeBetween(\"20:14\", \"20:21\") and moisture3 < 0.4))"
+      "activeCondition": "tank1 > 0 and (timeBetween(\"7:32\", \"7:33\") or timeBetween(\"12:02\", \"12:03\") or (timeBetween(\"16:44\", \"16:46\") and moisture2 < 0.4) or (timeBetween(\"20:10\", \"20:15\") and moisture3 < 0.4))"
     }
   ]
 }
