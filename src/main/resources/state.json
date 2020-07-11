@@ -59,7 +59,7 @@
         },
         {
           "controllerId": "controller1",
-          "componentId": "moisture1"
+          "componentId": "moisture2"
         },
         {
           "controllerId": "controller1",
@@ -70,7 +70,7 @@
           "componentId": "tank1"
         }
       ],
-      "activeCondition": "tank1 > 0 and (timeBetween(\"7:30\", \"7:31\") or timeBetween(\"12:00\", \"12:01\") or (timeBetween(\"16:50\", \"16:52\") and moisture2 < 0.4) or (timeBetween(\"20:00\", \"20:05\") and moisture2 < 0.4))"
+      "activeCondition": "tank1 > 0 and ((timeBetween(\"7:30\", \"7:31\") and moisture2 < 0.5) or (timeBetween(\"20:00\", \"20:02\") and moisture2 < 0.5) or (timeBetween(\"21:00\", \"21:02\") and moisture2 < 0.4))"
     },
     {
       "name": "Töpfe",
@@ -85,14 +85,14 @@
         },
         {
           "controllerId": "controller1",
-          "componentId": "valve3"
+          "componentId": "valve1"
         },
         {
           "controllerId": "controller1",
           "componentId": "tank1"
         }
       ],
-      "activeCondition": "tank1 > 0 and (timeBetween(\"7:31\", \"7:32\") or timeBetween(\"12:01\", \"12:02\") or (timeBetween(\"16:52\", \"16:54\") and moisture2 < 0.4) or (timeBetween(\"20:05\", \"20:10\") and moisture1 < 0.4))"
+      "activeCondition": "tank1 > 0 and ((timeBetween(\"7:31\", \"7:32\") and moisture1 < 0.5) or (timeBetween(\"20:05\", \"20:07\") and moisture1 < 0.5) or (timeBetween(\"21:05\", \"21:07\") and moisture1 < 0.4))"
     },
     {
       "name": "Kisterln",
@@ -103,7 +103,7 @@
         },
         {
           "controllerId": "controller1",
-          "componentId": "moisture1"
+          "componentId": "moisture3"
         },
         {
           "controllerId": "controller1",
@@ -114,7 +114,7 @@
           "componentId": "tank1"
         }
       ],
-      "activeCondition": "tank1 > 0 and (timeBetween(\"7:32\", \"7:33\") or timeBetween(\"12:02\", \"12:03\") or (timeBetween(\"16:54\", \"16:56\") and moisture2 < 0.4) or (timeBetween(\"20:10\", \"20:15\") and moisture3 < 0.4))"
+      "activeCondition": "tank1 > 0 and ((timeBetween(\"7:32\", \"7:33\") and moisture3 < 0.5) or (timeBetween(\"20:10\", \"20:12\") and moisture3 < 0.5) or (timeBetween(\"21:10\", \"21:12\") and moisture3 < 0.4))"
     }
   ]
 }
