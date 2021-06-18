@@ -6,7 +6,7 @@ It is developed using the [Spring Boot](https://projects.spring.io/spring-boot/)
 ## Prerequisites
 
 - Install Java 8
-- Install [Maven 3](https://maven.apache.org/)
+- Install [Maven 3](https://maven.apache.org/) (or use the included mvnw / mvnw.bat scripts)
 - Install and start InfluxDB by following the [Installation instructions](https://docs.influxdata.com/influxdb/latest/introduction/installation/) (Tested with version 1.2, but newer versions should work too)
 
 Clone this repository:
@@ -18,11 +18,11 @@ Clone this repository:
 
 Build and run in development mode:
 
-    mvn spring-boot:run
+    ./mvnw spring-boot:run
     
 Build for production mode:
 
-    mvn clean install
+    ./mvnw clean install
     
 Run in production mode:
 
