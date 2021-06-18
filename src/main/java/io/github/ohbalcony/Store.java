@@ -29,7 +29,7 @@ public class Store {
     private static final Logger log = LoggerFactory.getLogger(Store.class);
     
     // TODO make configurable
-    private static final String server = "http://gerty:8086";
+    private static final String server = "http://localhost:8086";
     private static final String dbName = "ohdb";
     
     private static final String MEASUREMENT_MOISTURE = "moisture";
